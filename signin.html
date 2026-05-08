@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Path - Sign In</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Visual Path</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="how-it-works.html">How It Works</a>
+            <a href="textbooks.html">Textbooks</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+        <div class="auth-buttons">
+            <a href="signup.html" class="auth-button"> Sign Up</a>
+            <a href="signin.html" class="auth-button"> Sign In</a>
+        </div>
+        <button id="theme-toggle">🌞</button>
+    </header>
+
+    <!-- Sign In Section -->
+    <section class="auth-section">
+        <h2 class="animated-text">Welcome Back!</h2>
+        <form class="auth-form" id="signin-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <p id="account-error" class="error-message" style="display: none; color: red; font-size: 0.9em;">Account not found!</p>
+            </div>
+            <button type="submit" class="auth-submit-button">Sign In</button>
+        </form>
+        <p class="auth-switch">Don't have an account? <a href="signup.html">Sign Up</a></p>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>ALWAYS SEEK TO GAIN NEW KNOWLEDGE. WANTS TO ASSIST OUR COUNTRY. Future Software Engineers…….</p>
+    </footer>
+
+    <!-- Link to JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        // Handle Sign In Form Submission
+        document.getElementById('signin-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            // Get email and password values
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const accountError = document.getElementById('account-error');
+
+            // Retrieve the stored account from local storage
+            const storedAccount = JSON.parse(localStorage.getItem('account'));
+
+            // Check if the entered email and password match the stored account
+            if (storedAccount && storedAccount.email === email && storedAccount.password === password) {
+                accountError.style.display = 'none'; // Hide error message
+                alert('Sign In Successful! Redirecting to Home page...');
+                window.location.href = 'index.html'; // Redirect to Home page
+            } else {
+                accountError.style.display = 'block'; // Show error message
+            }
+        });
+    </script>
+</body>
+</html>
